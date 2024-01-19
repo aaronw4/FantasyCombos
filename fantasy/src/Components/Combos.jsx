@@ -9,8 +9,10 @@ export default function Combos() {
         let players = [...data];
         player.salary = player.salary * 1.5;
         team.push(player);
-        let remainingPlayers = players.slice(i+1);
-        buildTeams(team, remainingPlayers);
+        players.splice(i, 1);
+        if (player.fppg  > 9.9) {
+            buildTeams(team, players);
+        }
     }
 
     function buildTeams(team, players) {
