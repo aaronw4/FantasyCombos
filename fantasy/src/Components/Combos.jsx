@@ -6,21 +6,18 @@ export default function Combos() {
     for (let i = 0; i < data.length-6; i++) {
         let team = [];
         let player = structuredClone(data[i]);
-        let players = [...data];
-        player.salary = player.salary * 1.5;
-        team.push(player);
-        players.splice(i, 1);
+        
         if (player.fppg  > 9.9) {
+            let players = [...data];
+            player.salary = player.salary * 1.5;
+            team.push(player);
+            players.splice(i, 1);
             buildTeams(team, players);
         }
     }
 
     function buildTeams(team, players) {
         for (let i = 0; i < players.length; i++) {
-            let newTeam = [...team];
-            let playersList = structuredClone(players);
-            newTeam.push(playersList[i]);
-            let remainingPlayers = playersList.slice(i+1);
             let cost = team.reduce((n, {salary}) => n + salary, 0);
             
             if (cost > 50000) {
@@ -33,14 +30,18 @@ export default function Combos() {
                 return
             }
 
+            let newTeam = [...team];
+            let playersList = structuredClone(players);
+            newTeam.push(playersList[i]);
+            let remainingPlayers = playersList.slice(i+1);
+
             buildTeams(newTeam, remainingPlayers);
         }
     };
 
     return (
         <>
-            <p>{data.length}</p>
-            <p>{console.log(teamCombos)}</p>
+            <p>{teamCombos.length} Teams</p>
         </>
     )
 };
