@@ -1,3 +1,13 @@
 .App {
   text-align: center;
 }
+form {
+  width: 80%;
+  margin: 50px auto;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-evenly;
+  input {
+    font-size: 16px;
+  }
+}
