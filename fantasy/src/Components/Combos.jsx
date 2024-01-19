@@ -14,18 +14,23 @@ export default function Combos() {
     }
 
     function buildTeams(team, players) {
-        if (team.length === 6) {
-            teamCombos.push(team)
-            return
-        } else if (players.length === 0) {
-            return
-        }
-
         for (let i = 0; i < players.length; i++) {
             let newTeam = [...team];
             let playersList = structuredClone(players);
             newTeam.push(playersList[i]);
             let remainingPlayers = playersList.slice(i+1);
+            let cost = team.reduce((n, {salary}) => n + salary, 0);
+            
+            if (cost > 50000) {
+                return
+            } else if (team.length === 6) {
+                team.push(cost)
+                teamCombos.push(team)
+                return
+            } else if (players.length === 0) {
+                return
+            }
+
             buildTeams(newTeam, remainingPlayers);
         }
     };
