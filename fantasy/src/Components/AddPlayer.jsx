@@ -33,14 +33,14 @@ export default function AddPlayer() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const id = players.length + 1;
-
+        const id = (players.length + 1).toString();
+        
         setPlayers([...players, {
             id: id, 
             name: name,
-            fppg: fppg,
-            oprk: oprk,
-            salary: salary
+            fppg: Number(fppg),
+            oprk: Number(oprk),
+            salary: Number(salary)
         }]);
 
         resetForm();
