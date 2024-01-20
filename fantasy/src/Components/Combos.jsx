@@ -1,37 +1,40 @@
-import {data} from '../Context/sampleData'
+import { useContext } from "react";
+import PlayerContext from '../Context/playersContext';
 
 export default function Combos() {
+    const { players, rowNumbers } = useContext(PlayerContext);
     let teamCombos = [];
 
-    for (let i = 0; i < data.length-6; i++) {
+    for (let i = 0; i < players.length; i++) {
         let team = [];
-        let player = structuredClone(data[i]);
+        let player = structuredClone(players[i]);
         
-        if (player.fppg  > 9.9) {
-            let players = [...data];
+        if (rowNumbers.includes(player.id)) {
+            let newPlayers = [...players];
             player.salary = player.salary * 1.5;
             team.push(player);
-            players.splice(i, 1);
-            buildTeams(team, players);
+            newPlayers.splice(i, 1);
+            
+            buildTeams(team, newPlayers);
         }
     }
 
-    function buildTeams(team, players) {
-        for (let i = 0; i < players.length; i++) {
+    function buildTeams(team, playersRemaining) {
+        for (let i = 0; i < playersRemaining.length; i++) {
             let cost = team.reduce((n, {salary}) => n + salary, 0);
-            
+
             if (cost > 50000) {
                 return
             } else if (team.length === 6) {
                 team.push(cost)
                 teamCombos.push(team)
                 return
-            } else if (players.length === 0) {
+            } else if (playersRemaining.length === 0) {
                 return
             }
 
             let newTeam = [...team];
-            let playersList = structuredClone(players);
+            let playersList = structuredClone(playersRemaining);
             newTeam.push(playersList[i]);
             let remainingPlayers = playersList.slice(i+1);
 
@@ -42,6 +45,7 @@ export default function Combos() {
     return (
         <>
             <p>{teamCombos.length} Teams</p>
+            {console.log(teamCombos)}
         </>
     )
 };
