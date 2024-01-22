@@ -11,8 +11,10 @@ function App() {
       <div className="App">
         <Header/>
         <AddPlayer/>
-        <Players/>
-        <Combos/>
+        <div id='playerTeamsCont'>
+          <Players/>
+          <Combos/>
+        </div>
       </div>
     </PlayersProvider>
   );
