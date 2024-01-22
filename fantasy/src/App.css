@@ -1,6 +1,33 @@
 .App {
   text-align: center;
 }
+#playerTeamsCont {
+  display: flex;
+}
+#playerCont {
+  display: block;
+  button {
+    margin-left: 10px;
+  }
+}
+table {
+  width: 25%;
+}
+#teamCombos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 10px;
+}
+.team {
+  flex-basis: 250px;
+  text-align: left;
+  border: 1px solid black;
+  padding: 5px;
+}
+.teamRow td {
+  padding-left: 5px;
+}
 form {
   width: 80%;
   margin: 50px auto;
